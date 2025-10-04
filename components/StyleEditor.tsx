@@ -48,7 +48,7 @@ const StyleEditor: React.FC<StyleEditorProps> = ({ options, setOptions, isCollap
     const labelClass = `block text-sm font-medium mb-1 text-[var(--sidebar-foreground)]`;
     const inputClass = `w-full p-2 border bg-[var(--input)] text-[var(--sidebar-foreground)] text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--sidebar-ring)]`;
     const gridClass = 'grid grid-cols-1 gap-4';
-    const [openAccordion, setOpenAccordion] = useState<string | null>('mainTitle');
+    const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
     const handleAccordionToggle = (id: string) => {
         setOpenAccordion(prev => (prev === id ? null : id));
@@ -66,7 +66,7 @@ const StyleEditor: React.FC<StyleEditorProps> = ({ options, setOptions, isCollap
     
     return (
         <div className="h-full flex flex-col">
-            <div className={`px-2 flex items-center justify-between`}>
+            <div className={`p-2 flex items-center justify-between`}>
               <h2 className={`text-base font-semibold flex items-center gap-2 text-[var(--sidebar-foreground)]`}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -82,7 +82,7 @@ const StyleEditor: React.FC<StyleEditorProps> = ({ options, setOptions, isCollap
             </div>
             
             {!isCollapsed && (
-                <div className="space-y-4 pt-4 overflow-y-auto">
+                <div className="space-y-4 pt-4 px-2 pb-2 overflow-y-auto">
                     <AccordionItem title="Main Title & Number" id="mainTitle" isOpen={openAccordion === 'mainTitle'} onToggle={handleAccordionToggle}>
                         <div className={gridClass}>
                             <div>

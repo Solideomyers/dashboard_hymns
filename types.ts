@@ -8,13 +8,20 @@ export interface Slide {
   type: SlideType;
   title?: string; // e.g., "HIMNO:", "CORO"
   lines: string[]; // The main text content
-  backgroundImage?: string;
+  backgroundImage?: string; // Now a base64 string
 }
 
 export interface Hymn {
   id: string;
   title: string;
-  slides: Slide[];
+  number: string;
+  stanzas: string[];
+  chorus: string;
+  backgrounds: {
+    cover: string; // base64 string
+    title: string; // base64 string
+    lyrics: string; // base64 string
+  };
 }
 
 export interface StyleOptions {

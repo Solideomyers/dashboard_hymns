@@ -32,7 +32,6 @@ const HymnSlide: React.FC<HymnSlideProps> = ({ slide, currentSlideIndex, totalSl
 
     resizeObserver.observe(containerElement);
     
-    // Set initial scale
     const initialWidth = containerElement.getBoundingClientRect().width;
     if (initialWidth > 0) {
         setScale(initialWidth / DESIGN_WIDTH);
@@ -41,25 +40,20 @@ const HymnSlide: React.FC<HymnSlideProps> = ({ slide, currentSlideIndex, totalSl
     return () => resizeObserver.disconnect();
   }, []);
   
-  // This effect handles the automatic text fitting
   useLayoutEffect(() => {
     const contentElement = contentRef.current;
     if (!contentElement) return;
 
-    // Reset transform to get the true overflow height
     contentElement.style.transform = 'scale(1)';
 
-    // Check for overflow with a small buffer
     const isOverflowing = contentElement.scrollHeight > contentElement.clientHeight + 2;
 
     if (isOverflowing) {
-        // Calculate the scale factor needed to fit the content
         const scaleFactor = (contentElement.clientHeight / contentElement.scrollHeight);
-        // Apply the scale transform from the top center
         contentElement.style.transform = `scale(${scaleFactor})`;
         contentElement.style.transformOrigin = 'center top';
     }
-  }, [slide, styleOptions, scale]); // Rerun when slide, styles, or the main container scale changes
+  }, [slide, styleOptions, scale]);
 
 
   const isDark = theme === 'dark';
@@ -123,7 +117,7 @@ const HymnSlide: React.FC<HymnSlideProps> = ({ slide, currentSlideIndex, totalSl
           transformOrigin: 'top left',
         }}
       >
-        {isDark && (
+        {isDark && slide.backgroundImage && (
           <>
             <div
               key={`bg-${currentSlideIndex}`}
@@ -179,7 +173,7 @@ const HymnSlide: React.FC<HymnSlideProps> = ({ slide, currentSlideIndex, totalSl
                   {slide.title}
                 </h2>
               )}
-              <div style={{width: '100%', textAlign: styleOptions.lyrics.align}}>
+              <div style={{width: '100%', textAlign: 'align' in styleOptions.lyrics ? styleOptions.lyrics.align : 'center'}}>
                 {slide.lines.map((line, index) => (
                   <p 
                     key={index} 
