@@ -1,0 +1,5 @@
+{
+  "name": "Hymn Presentation App",
+  "description": "A web application to display hymn lyrics in a presentation format, styled after the 'Gracia Eterna' church visuals.",
+  "requestFramePermissions": []
+}
